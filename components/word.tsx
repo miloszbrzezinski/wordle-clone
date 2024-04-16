@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LetterComponent } from "./letter-component";
 import { WordComponent } from "./word-component";
 
@@ -9,7 +9,7 @@ export const WordsComponent = () => {
   const correctWord = "apple";
 
   useEffect(() => {
-    const keyDownHandler = (e) => {
+    const keyDownHandler = (e: KeyboardEvent) => {
       if (e.code === "Backspace") {
         const tmpWord = [...inputWord];
         tmpWord.pop();
@@ -21,11 +21,6 @@ export const WordsComponent = () => {
         if (e.key.length === 1) {
           const word = [...inputWord, e.key];
           setInputWord(word);
-          console.log(`${word}  ${word.length === 6}  ${inputIndex}`);
-          //   if (word.length > 5) {
-          //     setInputWord([e.key]);
-          //     setInputIndex(inputIndex + 1);
-          //   }
         }
       }
       if (e.code === "Enter") {

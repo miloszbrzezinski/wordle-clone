@@ -21,10 +21,17 @@ export const LetterComponent = ({
 
   useEffect(() => {
     if (inputWord[index]) {
-      setWrongLetter(!correctWord.includes(inputWord[index]) && !isInput);
-      setCorrectLetter(correctWord.includes(inputWord[index]) && !isInput);
+      setWrongLetter(
+        !correctWord.toUpperCase().includes(inputWord[index].toUpperCase()) &&
+          !isInput,
+      );
+      setCorrectLetter(
+        correctWord.toUpperCase().includes(inputWord[index].toUpperCase()) &&
+          !isInput,
+      );
       setCorrectLetterCorrectPlace(
-        correctWord[index] === inputWord[index] && !isInput,
+        correctWord[index].toUpperCase() === inputWord[index].toUpperCase() &&
+          !isInput,
       );
     }
   }, [setCorrectLetter, correctWord, index, inputWord, isInput, wrongLetter]);
