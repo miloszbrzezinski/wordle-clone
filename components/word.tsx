@@ -6,6 +6,7 @@ export const WordsComponent = () => {
   const [inputWord, setInputWord] = useState<Array<string>>([]);
   const [inputIndex, setInputIndex] = useState<number>(1);
   const [message, setMessage] = useState<string>("");
+  const correctWord = "apple";
 
   useEffect(() => {
     const keyDownHandler = (e) => {
@@ -31,7 +32,12 @@ export const WordsComponent = () => {
         if (inputWord.length === 5) {
           setInputWord([]);
           setInputIndex(inputIndex + 1);
-          setMessage("");
+          if (inputWord.join("").toUpperCase() === correctWord.toUpperCase()) {
+            setMessage("You won!");
+          }
+          if (inputIndex === 6) {
+            setMessage(`You lost! Corerct word: ${correctWord}`);
+          }
         } else {
           setMessage("Not enaugh letters!");
         }
@@ -51,32 +57,32 @@ export const WordsComponent = () => {
         <WordComponent
           isInput={inputIndex === 1}
           inputWord={inputWord}
-          word="apple"
+          word={correctWord}
         />
         <WordComponent
           isInput={inputIndex === 2}
           inputWord={inputWord}
-          word="apple"
+          word={correctWord}
         />
         <WordComponent
           isInput={inputIndex === 3}
           inputWord={inputWord}
-          word="apple"
+          word={correctWord}
         />
         <WordComponent
           isInput={inputIndex === 4}
           inputWord={inputWord}
-          word="apple"
+          word={correctWord}
         />
         <WordComponent
           isInput={inputIndex === 5}
           inputWord={inputWord}
-          word="apple"
+          word={correctWord}
         />
         <WordComponent
           isInput={inputIndex === 6}
           inputWord={inputWord}
-          word="apple"
+          word={correctWord}
         />
       </div>
       {message.length > 0 && (

@@ -20,11 +20,36 @@ export const WordComponent = ({
 
   return (
     <div className="flex space-x-2 justify-center">
-      <LetterComponent inputWord={tmpInputWord} correctWord="apple" index={0} />
-      <LetterComponent inputWord={tmpInputWord} correctWord="apple" index={1} />
-      <LetterComponent inputWord={tmpInputWord} correctWord="apple" index={2} />
-      <LetterComponent inputWord={tmpInputWord} correctWord="apple" index={3} />
-      <LetterComponent inputWord={tmpInputWord} correctWord="apple" index={4} />
+      <LetterComponent
+        inputWord={tmpInputWord}
+        correctWord={word}
+        index={0}
+        isInput={isInput}
+      />
+      <LetterComponent
+        inputWord={tmpInputWord}
+        correctWord={word}
+        index={1}
+        isInput={isInput}
+      />
+      <LetterComponent
+        inputWord={tmpInputWord}
+        correctWord={word}
+        index={2}
+        isInput={isInput}
+      />
+      <LetterComponent
+        inputWord={tmpInputWord}
+        correctWord={word}
+        index={3}
+        isInput={isInput}
+      />
+      <LetterComponent
+        inputWord={tmpInputWord}
+        correctWord={word}
+        index={4}
+        isInput={isInput}
+      />
     </div>
   );
 };
