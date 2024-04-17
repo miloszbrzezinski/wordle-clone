@@ -25,7 +25,7 @@ export default function Home() {
           className="underline"
           target="_blank"
           rel="noopener noreferrer"
-          href={"https:github.com/miloszbrzezinski"}
+          href={"https://github.com/miloszbrzezinski"}
         >
           milosz brzezinski
         </a>{" "}
