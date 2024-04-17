@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { LetterComponent } from "./letter-component";
 import { WordComponent } from "./word-component";
 import { useRouter } from "next/navigation";
+import { AllowedKeys } from "@/data/keys";
 
 export const WordsComponent = () => {
   const [data, setData] = useState(Array);
@@ -11,6 +12,7 @@ export const WordsComponent = () => {
   const [message, setMessage] = useState<string>("");
   const [gameFinished, setGameFinished] = useState(false);
   const route = useRouter();
+  const allowedKeys = AllowedKeys;
 
   useEffect(() => {
     fetch(
@@ -20,42 +22,46 @@ export const WordsComponent = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setCorrectWord(data as string[]);
       });
   }, []);
 
   useEffect(() => {
     const keyDownHandler = (e: KeyboardEvent) => {
-      if (e.code === "Backspace") {
-        const tmpWord = [...inputWord];
-        tmpWord.pop();
-        if (tmpWord) {
-          setInputWord(tmpWord);
-        }
-      }
-      if (inputWord.length < 5 && !gameFinished) {
-        if (e.key.length === 1) {
-          const word = [...inputWord, e.key];
-          setInputWord(word);
-        }
-      }
-      if (e.code === "Enter") {
-        if (inputWord.length === 5) {
-          setInputWord([]);
-          setInputIndex(inputIndex + 1);
-          if (
-            inputWord.join("").toUpperCase() === correctWord[0].toUpperCase()
-          ) {
-            setMessage("You won!");
-            setGameFinished(true);
+      const key = e.key;
+      if (allowedKeys.includes(key.toUpperCase())) {
+        console.log("ALLOWED");
+
+        if (e.code === "Backspace") {
+          const tmpWord = [...inputWord];
+          tmpWord.pop();
+          if (tmpWord) {
+            setInputWord(tmpWord);
           }
-          if (inputIndex === 6) {
-            setMessage(`You lost! Corerct word: ${correctWord}`);
-            setGameFinished(true);
+        }
+        if (inputWord.length < 5 && !gameFinished) {
+          if (e.key.length === 1) {
+            const word = [...inputWord, e.key];
+            setInputWord(word);
           }
-        } else {
-          setMessage("Not enaugh letters!");
+        }
+        if (e.code === "Enter") {
+          if (inputWord.length === 5) {
+            setInputWord([]);
+            setInputIndex(inputIndex + 1);
+            if (
+              inputWord.join("").toUpperCase() === correctWord[0].toUpperCase()
+            ) {
+              setMessage("You won!");
+              setGameFinished(true);
+            }
+            if (inputIndex === 6) {
+              setMessage(`You lost! Corerct word: ${correctWord[0]}`);
+              setGameFinished(true);
+            }
+          } else {
+            setMessage("Not enaugh letters!");
+          }
         }
       }
     };
@@ -65,7 +71,7 @@ export const WordsComponent = () => {
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [inputWord, inputIndex, gameFinished, correctWord]);
+  }, [inputWord, inputIndex, gameFinished, correctWord, allowedKeys]);
 
   const resetGame = () => {
     route.refresh();
