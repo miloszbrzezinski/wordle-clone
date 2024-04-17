@@ -6,6 +6,7 @@ import { AllowedKeys } from "@/data/keys";
 import { Keyboard } from "./keyboard";
 
 export const Game = () => {
+  const [wordIndex, setWordIndex] = useState(0);
   const [data, setData] = useState(Array);
   const [correctWord, setCorrectWord] = useState<string[]>([]);
   const [inputWord, setInputWord] = useState<Array<string>>([]);
@@ -23,6 +24,7 @@ export const Game = () => {
         return res.json();
       })
       .then((data) => {
+        setCorrectWord([]);
         setCorrectWord(data as string[]);
       });
   }, []);
@@ -50,14 +52,16 @@ export const Game = () => {
           if (inputWord.length === 5) {
             setInputWord([]);
             setInputIndex(inputIndex + 1);
+            setMessage("");
             if (
-              inputWord.join("").toUpperCase() === correctWord[0].toUpperCase()
+              inputWord.join("").toUpperCase() ===
+              correctWord[wordIndex].toUpperCase()
             ) {
               setMessage("You won!");
               setGameFinished(true);
             }
             if (inputIndex === 6) {
-              setMessage(`You lost! Corerct word: ${correctWord[0]}`);
+              setMessage(`You lost! Corerct word: ${correctWord[wordIndex]}`);
               setGameFinished(true);
             }
           } else {
@@ -72,11 +76,21 @@ export const Game = () => {
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [inputWord, inputIndex, gameFinished, correctWord, allowedKeys]);
+  }, [
+    inputWord,
+    inputIndex,
+    gameFinished,
+    correctWord,
+    allowedKeys,
+    wordIndex,
+  ]);
 
   const resetGame = () => {
     route.refresh();
     setGameFinished(false);
+    setWordIndex(wordIndex + 1);
+    setInputIndex(1);
+    setMessage("");
   };
 
   const pressKey = (key: string) => {
@@ -88,6 +102,7 @@ export const Game = () => {
     if (inputWord.length === 5) {
       setInputWord([]);
       setInputIndex(inputIndex + 1);
+      setMessage("");
       if (inputWord.join("").toUpperCase() === correctWord[0].toUpperCase()) {
         setMessage("You won!");
         setGameFinished(true);
@@ -128,32 +143,32 @@ export const Game = () => {
         <WordComponent
           isInput={inputIndex === 1}
           inputWord={inputWord}
-          word={correctWord[0]}
+          word={correctWord[wordIndex]}
         />
         <WordComponent
           isInput={inputIndex === 2}
           inputWord={inputWord}
-          word={correctWord[0]}
+          word={correctWord[wordIndex]}
         />
         <WordComponent
           isInput={inputIndex === 3}
           inputWord={inputWord}
-          word={correctWord[0]}
+          word={correctWord[wordIndex]}
         />
         <WordComponent
           isInput={inputIndex === 4}
           inputWord={inputWord}
-          word={correctWord[0]}
+          word={correctWord[wordIndex]}
         />
         <WordComponent
           isInput={inputIndex === 5}
           inputWord={inputWord}
-          word={correctWord[0]}
+          word={correctWord[wordIndex]}
         />
         <WordComponent
           isInput={inputIndex === 6}
           inputWord={inputWord}
-          word={correctWord[0]}
+          word={correctWord[wordIndex]}
         />
         <div className="space-y-1 flex flex-col">
           {message.length > 0 && (

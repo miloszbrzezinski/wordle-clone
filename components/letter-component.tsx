@@ -20,7 +20,13 @@ export const LetterComponent = ({
     useState(false);
 
   useEffect(() => {
-    if (inputWord[index]) {
+    if (!inputWord[0]) {
+      setWrongLetter(false);
+      setCorrectLetter(false);
+      setCorrectLetterCorrectPlace(false);
+    }
+
+    if (inputWord[index] && correctWord) {
       setWrongLetter(
         !correctWord.toUpperCase().includes(inputWord[index].toUpperCase()) &&
           !isInput,

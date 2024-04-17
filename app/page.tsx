@@ -9,6 +9,28 @@ export default function Home() {
         <p>Wordle</p>
         <Game />
       </div>
+      <p className="text-xs font-light text-neutral-500 p-1 text-center">
+        Powered by{" "}
+        <a
+          className="underline"
+          target="_blank"
+          rel="noopener noreferrer"
+          href={"https://random-word-api.herokuapp.com"}
+        >
+          random-word-api.herokuapp.com
+        </a>
+        <br />
+        Made by{" "}
+        <a
+          className="underline"
+          target="_blank"
+          rel="noopener noreferrer"
+          href={"https:github.com/miloszbrzezinski"}
+        >
+          milosz brzezinski
+        </a>{" "}
+        for portfolio purposes.
+      </p>
     </main>
   );
 }
