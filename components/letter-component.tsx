@@ -39,7 +39,7 @@ export const LetterComponent = ({
   return (
     <div
       className={cn(
-        "w-14 h-14 flex border rounded-md items-center justify-center text-3xl font-semibold",
+        "w-12 h-12 flex border rounded-md items-center justify-center text-2xl font-semibold",
         wrongLetter && "bg-neutral-600",
         correctLetter && "bg-amber-500",
         correctLetterCorrectPlace && "bg-green-500",
