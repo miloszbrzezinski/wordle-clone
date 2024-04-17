@@ -103,16 +103,19 @@ export const Game = () => {
       setInputWord([]);
       setInputIndex(inputIndex + 1);
       setMessage("");
-      if (inputWord.join("").toUpperCase() === correctWord[0].toUpperCase()) {
+      if (
+        inputWord.join("").toUpperCase() ===
+        correctWord[inputIndex].toUpperCase()
+      ) {
         setMessage("You won!");
         setGameFinished(true);
       }
       if (inputIndex === 6) {
-        setMessage(`You lost! Corerct word: ${correctWord[0]}`);
+        setMessage(`You lost! correct word: ${correctWord[inputIndex]}`);
         setGameFinished(true);
       }
     } else {
-      setMessage("Not enaugh letters!");
+      setMessage("Not enough letters!");
     }
   };
 
