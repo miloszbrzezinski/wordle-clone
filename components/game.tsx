@@ -7,7 +7,6 @@ import { Keyboard } from "./keyboard";
 
 export const Game = () => {
   const [wordIndex, setWordIndex] = useState(0);
-  const [data, setData] = useState(Array);
   const [correctWord, setCorrectWord] = useState<string[]>([]);
   const [inputWord, setInputWord] = useState<Array<string>>([]);
   const [inputIndex, setInputIndex] = useState<number>(1);
@@ -51,7 +50,7 @@ export const Game = () => {
         if (e.code === "Enter") {
           if (inputWord.length === 5) {
             setInputWord([]);
-            setInputIndex(inputIndex + 1);
+            setInputIndex((i) => i + 1);
             setMessage("");
             if (
               inputWord.join("").toUpperCase() ===
@@ -88,7 +87,7 @@ export const Game = () => {
   const resetGame = () => {
     route.refresh();
     setGameFinished(false);
-    setWordIndex(wordIndex + 1);
+    setWordIndex((i) => i + 1);
     setInputIndex(1);
     setMessage("");
   };
@@ -101,7 +100,7 @@ export const Game = () => {
   const pressEnter = () => {
     if (inputWord.length === 5) {
       setInputWord([]);
-      setInputIndex(inputIndex + 1);
+      setInputIndex((i) => i + 1);
       setMessage("");
       if (
         inputWord.join("").toUpperCase() ===
