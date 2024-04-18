@@ -104,13 +104,13 @@ export const Game = () => {
       setMessage("");
       if (
         inputWord.join("").toUpperCase() ===
-        correctWord[inputIndex].toUpperCase()
+        correctWord[wordIndex].toUpperCase()
       ) {
         setMessage("You won!");
         setGameFinished(true);
       }
       if (inputIndex === 6) {
-        setMessage(`You lost! correct word: ${correctWord[inputIndex]}`);
+        setMessage(`You lost! correct word: ${correctWord[wordIndex]}`);
         setGameFinished(true);
       }
     } else {
